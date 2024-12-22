@@ -62,14 +62,6 @@ export function Sidebar({ currentView, setCurrentView, taskCounts }: SidebarProp
             {taskCounts['assigned'] > 0 && <span className="ml-auto text-xs">{taskCounts['assigned']}</span>}
           </Button>
           <Button 
-            variant={currentView === 'flagged' ? 'secondary' : 'ghost'} 
-            className="w-full justify-start gap-3"
-            onClick={() => setCurrentView('flagged')}
-          >
-            <Flag className="w-4 h-4" /> Flagged email
-            {taskCounts['flagged'] > 0 && <span className="ml-auto text-xs">{taskCounts['flagged']}</span>}
-          </Button>
-          <Button 
             variant={currentView === 'tasks' ? 'secondary' : 'ghost'} 
             className="w-full justify-start gap-3"
             onClick={() => setCurrentView('tasks')}
