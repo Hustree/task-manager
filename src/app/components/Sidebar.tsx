@@ -2,6 +2,7 @@ import { Button } from "@/app/components/ui/button"
 import { Input } from "@/app/components/ui/input"
 import { Sun, Star, Calendar, User, Flag, ListTodo, Plus, Search } from 'lucide-react'
 import { View } from '../types'
+import { GitHubContributions } from './GitHubContributions'
 
 interface SidebarProps {
   currentView: View;
@@ -70,6 +71,10 @@ export function Sidebar({ currentView, setCurrentView, taskCounts }: SidebarProp
             {taskCounts['tasks'] > 0 && <span className="ml-auto text-xs">{taskCounts['tasks']}</span>}
           </Button>
         </nav>
+
+        <div className="mt-6">
+          <GitHubContributions />
+        </div>
       </div>
       <div className="mt-auto p-4 border-t border-gray-800">
         <Button variant="ghost" className="w-full justify-start gap-3">
