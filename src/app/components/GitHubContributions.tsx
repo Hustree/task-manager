@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import { Loader2 } from 'lucide-react'
 
+interface GitHubContributionsProps {
+  username: string;
+}
+
 const CONTRIBUTION_LEVELS = {
   0: '#1b1f23',
   1: '#0e4429',
