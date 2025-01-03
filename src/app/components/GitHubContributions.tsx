@@ -44,7 +44,7 @@ const formatDate = (dateString: string) => {
 }
 
 export function GitHubContributions() {
-  const [username, setUsername] = useState('Hustree')
+  const [username, setUsername] = useState('Hustree') // Default username
   const [contributions, setContributions] = useState<ContributionDay[]>([])
   const [stats, setStats] = useState<ContributionStats>({
     currentStreak: 0,
@@ -55,6 +55,13 @@ export function GitHubContributions() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+
+    if (!username.trim()) {
+      setError('Please enter a GitHub username')
+      setLoading(false)
+      return
+    }
+
     const fetchGitHubData = async () => {
       try {
         // const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events`)
@@ -178,7 +185,7 @@ export function GitHubContributions() {
 
       <div className="mt-4 text-xs text-gray-400">
         <a 
-          href={`https://github.com/${GITHUB_USERNAME}`}
+          href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-400 transition-colors"
