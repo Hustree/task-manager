@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { Input } from "./ui/input"
 import { Loader2 } from 'lucide-react'
 
 interface GitHubContributionsProps {
@@ -43,6 +44,7 @@ const formatDate = (dateString: string) => {
 }
 
 export function GitHubContributions() {
+  const [username, setUsername] = useState('Hustree')
   const [contributions, setContributions] = useState<ContributionDay[]>([])
   const [stats, setStats] = useState<ContributionStats>({
     currentStreak: 0,
@@ -55,7 +57,8 @@ export function GitHubContributions() {
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events`)
+        // const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events`)
+        const response = await fetch(`https://api.github.com/users/${username}/events`)
         if (!response.ok) throw new Error('Failed to fetch GitHub data')
         
         const events = await response.json()
@@ -114,7 +117,7 @@ export function GitHubContributions() {
     }
 
     fetchGitHubData()
-  }, [])
+  }, [username])
 
   if (loading) {
     return (
@@ -136,6 +139,13 @@ export function GitHubContributions() {
     <div className="p-4 bg-gray-800 rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-sm font-semibold">GitHub Activity</h3>
+        <Input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-32 h-6 text-xs bg-gray-700 border-gray-600"
+          placeholder="GitHub username"
+        />
         <div className="text-xs text-gray-400">
           🔥 {stats.currentStreak} day streak
         </div>
